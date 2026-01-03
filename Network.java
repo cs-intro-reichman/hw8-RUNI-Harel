@@ -66,7 +66,7 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         //// Replace the following statement with your code
         //if they do not exist - return false
-        if(getUser(name1)==null || getUser(name2)==null){
+        if(getUser(name1)==null || getUser(name2)==null || name1.equals(name2)){
             return false;
         }
         //if they do exist, return true if the opertation succeeded
@@ -84,6 +84,9 @@ public class Network {
         for(int i=0;i<userCount;i++){
             if(users[i]==theCurUser){
                 continue;
+            }
+            if (theCurUser.follows(users[i].getName())) {
+                continue;              
             }
             int tempMutu = theCurUser.countMutual(users[i]);
             if (tempMutu>maxRec) {
@@ -107,6 +110,11 @@ public class Network {
                 mostPopUser=users[i];
             }
         }
+
+        if (mostPopUser == null) {
+        return null;
+        }
+
         return mostPopUser.getName();
     }
 
@@ -126,6 +134,10 @@ public class Network {
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
        //// Replace the following statement with your code
-       return null;
+       String ans = "Network:";
+       for(int i=0;i<userCount;i++){
+            ans += "\n" + users[i];
+       }
+       return ans;
     }
 }
