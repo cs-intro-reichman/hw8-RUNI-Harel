@@ -90,6 +90,7 @@ public class Network {
             }
             int tempMutu = theCurUser.countMutual(users[i]);
             if (tempMutu>maxRec) {
+                maxRec=tempMutu;
                 mostRecommendedUserToFollow=users[i];
             }
         }
